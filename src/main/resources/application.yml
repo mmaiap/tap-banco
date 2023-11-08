@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: banco
+  jpa:
+    defer-datasource-initialization: true
+  datasource:
+     url: jdbc:h2:mem:testdb
+     username: sa
+     password:
+  h2:
+     console:
+       enabled: true
+       path: /h2-console
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
