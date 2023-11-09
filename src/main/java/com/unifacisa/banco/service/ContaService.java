@@ -3,7 +3,9 @@ package com.unifacisa.banco.service;
 import com.unifacisa.banco.domain.entity.Conta;
 import com.unifacisa.banco.domain.entity.ContaDTO;
 import com.unifacisa.banco.exception.ContaException;
+import com.unifacisa.banco.exception.ContaNaoEncontradaException;
 import com.unifacisa.banco.mapper.ContaMapper;
+import com.unifacisa.banco.repository.AcoesRepository;
 import com.unifacisa.banco.repository.ContaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ import java.math.BigDecimal;
 public class ContaService {
 
     private final ContaRepository repository;
+
+    private final AcoesRepository acoesRepository;
 
     private final ContaMapper mapper;
 
@@ -50,5 +54,19 @@ public class ContaService {
         conta.sacar(valor);
 
         return repository.save(conta);
+    }
+
+    public Conta buscarInformacoesConta(String cpf){
+
+        var conta = repository.buscarContaPorCpf(cpf);
+
+        if (ObjectUtils.isEmpty(conta)){
+            throw new ContaNaoEncontradaException("Conta não encontrada");
+        }
+
+        //TODO
+        //implementar chamada para serviço de fora
+
+        return conta;
     }
 }

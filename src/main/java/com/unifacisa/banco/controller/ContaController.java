@@ -38,4 +38,10 @@ public class ContaController {
         ContaDTO contaDTO = mapper.domainToDTO(service.depositarEmConta(cpf, valor));
         return new ResponseEntity<>(contaDTO, HttpStatus.OK);
     }
+
+    @GetMapping()
+    public ResponseEntity<ContaDTO> listarInformacoesDaConta(@RequestParam("cpf") String cpf){
+        ContaDTO contaDTO = mapper.domainToDTO(service.depositarEmConta(cpf, valor));
+        return new ResponseEntity<>(contaDTO, HttpStatus.OK);
+    }
 }
